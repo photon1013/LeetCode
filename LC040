@@ -1,0 +1,32 @@
+class Solution {
+    List<List<Integer>> paths = new ArrayList<>();
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        Arrays.sort(candidates);
+        LinkedList<Integer> path = new LinkedList<>();
+        sum(candidates, target, 0, path);
+        
+        return paths;
+        
+    }
+    
+    void sum(int[] candidates, int target, int i, LinkedList<Integer> path){
+        if(target == 0){
+            paths.add((List<Integer>) path.clone());
+            return;
+        }
+        
+        if(i == candidates.length || target < 0){
+            return;
+        }
+        
+        path.add(candidates[i]);
+        sum(candidates, target-candidates[i], i+1, path);
+        path.removeLast();
+        
+        while(i<candidates.length-1 && candidates[i+1] == candidates[i]){
+            i++;
+        }
+        
+        sum(candidates, target, i+1, path);
+    }
+}
