@@ -1,0 +1,41 @@
+class Solution {
+    public String convert(String s, int numRows) {
+        if(numRows == 1){
+            return s;
+        }
+        String res = "";
+        List<String> list = new ArrayList<>();
+        
+        for(int i = 0; i<numRows; i++){
+            list.add("");
+        }
+        
+        int idx = 0;
+        boolean down = true;
+        
+        for(int i = 0; i<s.length(); i++){
+            String str = list.get(idx);
+            str = str + s.charAt(i);
+            list.set(idx, str);
+            
+            if(down){
+                idx = idx + 1;
+                if(idx == numRows-1){
+                    down = false;
+                }
+            }else{
+                idx = idx - 1;
+                if(idx == 0){
+                    down = true;
+                }
+            }
+        }
+        
+        for(int i = 0; i<numRows; i++){
+            
+            res = res + list.get(i);
+        }
+        
+        return res;
+    }
+}
