@@ -1,0 +1,33 @@
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        //sort karo and usko key ke jaise use karo
+        Map<String, List<String>> map = new HashMap<>();
+        
+        for(int i = 0; i<strs.length; i++){
+            String str = getSortedString(strs[i]);
+            if(map.get(str) == null){
+                map.put(str, new ArrayList<>());
+            }
+            map.get(str).add(strs[i]);
+        }
+        
+        List<List<String>> result = new ArrayList<>();
+        
+        for(Map.Entry<String, List<String>> entry: map.entrySet()){
+            result.add(entry.getValue());
+        }
+        
+        return result;
+    }
+    
+    String getSortedString(String str){
+        char[] ch = str.toCharArray();
+        Arrays.sort(ch);
+        String s = "";
+        for(char c : ch){
+            s = s + c;
+        }
+        
+        return s;
+    }
+}
