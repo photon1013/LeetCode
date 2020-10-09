@@ -1,0 +1,45 @@
+class Solution {
+    public int[][] merge(int[][] intervals) {
+        
+        if(intervals.length == 0){
+            return intervals;
+        }
+        
+        Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0]));
+        
+        int start = intervals[0][0];
+        int end = intervals[0][1];
+        
+        List<List<Integer>> list = new ArrayList<>();
+        
+        for(int i = 1; i<intervals.length; i++){
+            
+            if(intervals[i][0] > end){
+                List<Integer> lst = new ArrayList<>();
+                lst.add(start);
+                lst.add(end);
+                list.add(lst);
+                
+                start = intervals[i][0];
+                end = intervals[i][1];
+            }else{
+                end = Math.max(intervals[i][1], end);
+            }
+            
+        }
+        
+        List<Integer> lst = new ArrayList<>();
+        lst.add(start);
+        lst.add(end);
+        list.add(lst);
+        
+        int[][] result = new int[list.size()][2];
+        
+        for(int i = 0; i< list.size(); i++){
+            result[i][0] = list.get(i).get(0);
+            result[i][1] = list.get(i).get(1);
+        }
+        
+        return result;
+    }
+}
