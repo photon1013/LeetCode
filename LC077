@@ -1,0 +1,32 @@
+class Solution {
+    public List<List<Integer>> combine(int n, int k) {
+        
+        List<List<Integer>> queue = new ArrayList<>();
+        queue.add(new ArrayList<>());
+        
+        List<List<Integer>> result = new ArrayList<>();
+        
+        int index = 1;
+        while(!queue.isEmpty()){
+            int size = queue.size();
+            
+            for(int i = 0; i<size; i++){
+                
+                List<Integer> lst = new ArrayList<>(queue.get(i));
+                lst.add(index);
+                if(lst.size() == k){
+                    result.add(lst);
+                }else{
+                    queue.add(lst);
+                }
+            }
+            index++;
+            if(index > n){
+                break;
+            }
+        }
+        
+        return result;
+        
+    }
+}
