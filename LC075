@@ -1,0 +1,27 @@
+class Solution {
+    public void sortColors(int[] nums) {
+        
+        int zerokaplace = 0;
+        int i = 0;
+        int twokaplace = nums.length-1;
+        
+        while(i<=twokaplace){
+            if(nums[i] == 0 && i != zerokaplace){
+                //swap with zero ka place
+                int temp = nums[i];
+                nums[i] = nums[zerokaplace];
+                nums[zerokaplace] = temp;
+                zerokaplace++;
+            }else if(nums[i] == 2 && i != twokaplace){
+                //swap with two ka place
+                int temp = nums[i];
+                nums[i] = nums[twokaplace];
+                nums[twokaplace] = temp;
+                twokaplace--;
+            }else{
+                i++;
+            }
+        }
+        
+    }
+}
